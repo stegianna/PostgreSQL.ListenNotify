@@ -1,0 +1,5 @@
+This software includes the following third-party libraries:
+
+1. Npgsql (https://github.com/npgsql/npgsql)
+   License: PostgreSQL License
+   Copyright (c) 2002-2025, The Npgsql Development Team

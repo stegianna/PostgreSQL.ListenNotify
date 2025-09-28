@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36121.58
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSQL.ListenNotify", "src\PostgreSQL.ListenNotify\PostgreSQL.ListenNotify.csproj", "{62D82F5B-6B68-EEFF-1976-B1266B2D749B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSQL.ListenNotify.Demo", "demo\PostgreSQL.ListenNotify.Demo\PostgreSQL.ListenNotify.Demo.csproj", "{91DC9C08-2488-71A5-1236-4FE79958AF0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSQL.ListenNotify.DemoWebAPI", "demo\PostgreSQL.ListenNotify.DemoWebAPI\PostgreSQL.ListenNotify.DemoWebAPI.csproj", "{495DA068-FD16-7617-8881-43C2D03F7DD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSQL.ListenNotify.Tests", "tests\PostgreSQL.ListenNotify.Tests\PostgreSQL.ListenNotify.Tests.csproj", "{1DE46812-26F1-A841-ABB1-3E384F40549B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62D82F5B-6B68-EEFF-1976-B1266B2D749B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D82F5B-6B68-EEFF-1976-B1266B2D749B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D82F5B-6B68-EEFF-1976-B1266B2D749B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D82F5B-6B68-EEFF-1976-B1266B2D749B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DC9C08-2488-71A5-1236-4FE79958AF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DC9C08-2488-71A5-1236-4FE79958AF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DC9C08-2488-71A5-1236-4FE79958AF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DC9C08-2488-71A5-1236-4FE79958AF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{495DA068-FD16-7617-8881-43C2D03F7DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{495DA068-FD16-7617-8881-43C2D03F7DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{495DA068-FD16-7617-8881-43C2D03F7DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{495DA068-FD16-7617-8881-43C2D03F7DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DE46812-26F1-A841-ABB1-3E384F40549B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DE46812-26F1-A841-ABB1-3E384F40549B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DE46812-26F1-A841-ABB1-3E384F40549B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DE46812-26F1-A841-ABB1-3E384F40549B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C71FC147-BE4E-4D88-ADF4-1DBB21CE0128}
+	EndGlobalSection
+EndGlobal
