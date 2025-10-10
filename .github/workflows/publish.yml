@@ -1,0 +1,57 @@
+# This workflow publish nuget packages to nuget.org
+# It is triggered when a new tag is pushed to the repository
+
+name: Publish NuGet Package ${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Trigger on version tags like v1.0.0
+
+jobs:
+  publish:
+    name: Publish NuGet Package
+    runs-on: ubuntu-latest
+
+    env:
+      DOTNET_VERSION: '9.0.x'
+      DOTNET_PROJECT: 'src/PostgreSQL.ListenNotify/PostgreSQL.ListenNotify.csproj'
+      DOTNET_TEST_PROJECT: 'tests/PostgreSQL.ListenNotify.Tests/PostgreSQL.ListenNotify.Tests.csproj'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build the project
+        run: dotnet build ${{ env.DOTNET_PROJECT }} --configuration Release --no-restore
+
+      - name: Test the project
+        run: dotnet test ${{ env.DOTNET_TEST_PROJECT }} --configuration Release --no-build --verbosity normal
+
+      - name: Pack the project
+        run: dotnet pack ${{ env.DOTNET_PROJECT }} --configuration Release --no-build --output ./nupkg --include-symbols -p:SymbolPackageFormat=snupkg
+
+      - name: Publish NuGet packages
+        run: |
+          dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ./nupkg/*.snupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
+      - name: Create Summary
+        run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "## 🚀 Build & Push Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Detail | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| 📦 **Version** | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔗 **sha** | ${{ github.sha }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🕒 **Timestamp** | $TIMESTAMP |" >> $GITHUB_STEP_SUMMARY
+          echo "| 👤 **Run by** | ${{ github.actor }} |" >> $GITHUB_STEP_SUMMARY
