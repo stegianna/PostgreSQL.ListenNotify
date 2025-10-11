@@ -13,7 +13,7 @@
 	<PackageProjectUrl>https://github.com/stegianna/PostgreSQL.ListenNotify</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/stegianna/PostgreSQL.ListenNotify</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
-    <PackageTags>postgresql;postgres;listen;notify;pubsub;database;npgsql</PackageTags>
+    <PackageTags>postgresql;postgres;listen;notify;pubsub;database</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     
