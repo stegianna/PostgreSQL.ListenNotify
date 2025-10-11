@@ -39,10 +39,17 @@ jobs:
       - name: Pack the project
         run: dotnet pack ${{ env.DOTNET_PROJECT }} --configuration Release --no-build --output ./nupkg --include-symbols -p:SymbolPackageFormat=snupkg
 
+      # Get a short-lived NuGet API key
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }} # Recommended: use a secret for your nuget.org username (profile name), NOT your email address
+
       - name: Publish NuGet packages
         run: |
-          dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
-          dotnet nuget push ./nupkg/*.snupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ./nupkg/*.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ./nupkg/*.snupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
 
       - name: Create Summary
         run: |
