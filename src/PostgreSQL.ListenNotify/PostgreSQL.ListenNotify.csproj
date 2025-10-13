@@ -7,10 +7,9 @@
     
     <!-- NuGet Package Information -->
     <PackageId>PostgreSQL.ListenNotify</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Stefano Giannattasio</Authors>
     <Description>A .NET library for working with PostgreSQL's LISTEN/NOTIFY functionality</Description>
-	<PackageProjectUrl>https://github.com/stegianna/PostgreSQL.ListenNotify</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/stegianna/PostgreSQL.ListenNotify</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
     <PackageTags>postgresql;postgres;listen;notify;pubsub;database</PackageTags>
