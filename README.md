@@ -46,7 +46,7 @@ public class NotificationHandler : IDisposable
         _notificationService = notificationService;
         
         // Subscribe to notifications using the Subscribe method
-        _subscription = _notificationService.Subscribe(OnNotificationReceived);
+        _subscription = _notificationService.Subscribe("channel1", OnNotificationReceived);
     }
 
     private void OnNotificationReceived(PostgresNotificationEventArgs e)
@@ -59,7 +59,7 @@ public class NotificationHandler : IDisposable
     public void SubscribeToSpecificChannel()
     {
         // Subscribe to a specific channel with inline handler
-        _notificationService.Subscribe("custom_channel", notification => 
+        _notificationService.Subscribe("channel2", notification => 
         {
             Console.WriteLine($"Specific handler for {notification.Channel}: {notification.Payload}");
         });
