@@ -2,6 +2,7 @@
 # It is triggered when a new tag is pushed to the repository
 
 name: Publish NuGet Package
+run-name: Publish NuGet Package ${{ github.ref_name }}
 
 on:
   push:
@@ -64,4 +65,3 @@ jobs:
           echo "| 📦 **Version** | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
           echo "| 🔗 **sha** | ${{ github.sha }} |" >> $GITHUB_STEP_SUMMARY
           echo "| 🕒 **Timestamp** | $TIMESTAMP |" >> $GITHUB_STEP_SUMMARY
-          echo "| 👤 **Run by** | ${{ github.actor }} |" >> $GITHUB_STEP_SUMMARY
