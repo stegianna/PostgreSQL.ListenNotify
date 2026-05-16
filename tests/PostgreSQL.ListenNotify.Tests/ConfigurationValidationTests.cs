@@ -7,7 +7,7 @@ using PostgreSQL.ListenNotify.DependencyInjection;
 
 namespace PostgreSQL.ListenNotify.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("Unit")]
     public class PostgresNotificationOptionsTests
     {
         [Test]
@@ -55,7 +55,7 @@ namespace PostgreSQL.ListenNotify.Tests
         }
     }
 
-    [TestFixture]
+    [TestFixture, Category("Unit")]
     public class PostgresNotificationEventArgsTests
     {
         [Test]
@@ -79,7 +79,7 @@ namespace PostgreSQL.ListenNotify.Tests
         }
     }
 
-    [TestFixture]
+    [TestFixture, Category("Unit")]
     public class ServiceCollectionExtensionsTests
     {
         [Test]
@@ -118,7 +118,7 @@ namespace PostgreSQL.ListenNotify.Tests
         }
     }
 
-    [TestFixture]
+    [TestFixture, Category("Unit")]
     public class PostgresNotificationServiceTests
     {
         private Mock<ILogger<PostgresNotificationService>> _loggerMock;

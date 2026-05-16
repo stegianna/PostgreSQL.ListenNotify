@@ -4,7 +4,7 @@ using PostgreSQL.ListenNotify.Configuration;
 
 namespace PostgreSQL.ListenNotify.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("Unit")]
     public class PostgresNotificationServiceMockTests
     {
         private Mock<ILogger<PostgresNotificationService>> _loggerMock;

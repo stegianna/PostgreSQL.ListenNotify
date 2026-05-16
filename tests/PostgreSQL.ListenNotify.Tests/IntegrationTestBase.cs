@@ -2,30 +2,53 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PostgreSQL.ListenNotify.DependencyInjection;
+using Testcontainers.PostgreSql;
 
 namespace PostgreSQL.ListenNotify.Tests
 {
-    /// <summary>
-    /// Base class for integration tests that require a real PostgreSQL instance.
-    /// Only run these tests when you have a PostgreSQL server available.
-    /// </summary>
-    [TestFixture, Explicit("Requires PostgreSQL server")]
+    public class PostgresFixture
+    {
+        public PostgreSqlContainer Container { get; private set; }
+        public string ConnectionString => Container.GetConnectionString();
+
+        [OneTimeSetUp]
+        public async Task GlobalSetup()
+        {
+            Container = new PostgreSqlBuilder("postgres:18")
+                .WithDatabase("postgres")
+                .WithUsername("postgres")
+                .WithPassword("postgrespassword")
+                .Build();
+
+            await Container.StartAsync();
+        }
+
+        [OneTimeTearDown]
+        public async Task GlobalTeardown()
+        {
+            await Container.DisposeAsync();
+        }
+    }
+
+    [TestFixture, Category("Integration")]
     public class IntegrationTestBase
     {
         protected IHost _host;
         protected IPostgresNotificationService _notificationService;
-        protected string _connectionString = "Host=localhost;Port=5432;Username=postgressu;Password=postgrespassword;Database=postgres;";
+        protected static PostgresFixture _fixture { get; } = new PostgresFixture();
         protected string _testChannel = "test_channel";
 
         [OneTimeSetUp]
         public async Task SetupIntegrationTest()
         {
+            await _fixture.GlobalSetup();
+
             _host = Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
                     services.AddPostgresNotifications(options =>
                     {
-                        options.ConnectionString = _connectionString;
+                        options.ConnectionString = _fixture.ConnectionString;
                         options.ListenChannels = new List<string> { _testChannel };
                         options.DefaultNotifyChannel = _testChannel;
                     });
@@ -51,6 +74,8 @@ namespace PostgreSQL.ListenNotify.Tests
                 await _host.StopAsync();
                 _host.Dispose();
             }
+
+            await _fixture.GlobalTeardown();
         }
 
         [Test]
