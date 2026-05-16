@@ -18,16 +18,16 @@ jobs:
       id-token: write  # enable GitHub OIDC token issuance for this job
 
     env:
-      DOTNET_VERSION: '9.0.x'
+      DOTNET_VERSION: '10.0.x'
       DOTNET_PROJECT: 'src/PostgreSQL.ListenNotify/PostgreSQL.ListenNotify.csproj'
       DOTNET_TEST_PROJECT: 'tests/PostgreSQL.ListenNotify.Tests/PostgreSQL.ListenNotify.Tests.csproj'
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
