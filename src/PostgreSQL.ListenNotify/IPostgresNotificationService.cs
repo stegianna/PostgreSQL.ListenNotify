@@ -12,7 +12,7 @@ namespace PostgreSQL.ListenNotify
         /// <summary>
         /// Event triggered when a notification is received
         /// </summary>
-        event EventHandler<PostgresNotificationEventArgs> NotificationReceived;
+        event EventHandler<PostgresNotificationEventArgs>? NotificationReceived;
         
         /// <summary>
         /// Gets whether the service is currently connected to PostgreSQL

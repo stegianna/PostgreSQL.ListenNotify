@@ -430,3 +430,6 @@ FodyWeavers.xsd
 # Additional folders to ignore
 **/CoverageReport/
 **/TestResults/
+
+# MacOS specific files
+.DS_Store

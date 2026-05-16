@@ -7,19 +7,18 @@ public static class PostgresNotificationServiceExtensions
         string channel,
         Action<string> handler)
     {
-        var postgresService = service as PostgresNotificationService;
-        var subscription = new PostgresNotificationSubscription(postgresService, channel, handler);
+        var subscription = new PostgresNotificationSubscription(service, channel, handler);
         return subscription;
     }
     
     private class PostgresNotificationSubscription : IDisposable
     {
-        private readonly PostgresNotificationService _service;
+        private readonly IPostgresNotificationService _service;
         private readonly string _channel;
         private readonly Action<string> _handler;
         
         public PostgresNotificationSubscription(
-            PostgresNotificationService service,
+            IPostgresNotificationService service,
             string channel,
             Action<string> handler)
         {
@@ -30,7 +29,7 @@ public static class PostgresNotificationServiceExtensions
             _service.NotificationReceived += OnNotificationReceived;
         }
         
-        private void OnNotificationReceived(object sender, PostgresNotificationEventArgs e)
+        private void OnNotificationReceived(object? sender, PostgresNotificationEventArgs e)
         {
             if (e.Channel == _channel)
             {

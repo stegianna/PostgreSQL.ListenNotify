@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Constants for PostgreSQL notification configuration
-var connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
+var connectionString = builder.Configuration.GetConnectionString("PostgreSQL")!;
 const string channelName = "test_channel";
 
 builder.Services.AddPostgresNotifications(options =>
@@ -43,11 +43,11 @@ app.MapPost("/notify", (string payload) =>
 .WithName("Notify")
 .WithDescription("Sends a notification to PostgreSQL channel")
 .Produces<object>(StatusCodes.Status200OK)
-.WithOpenApi(operation => 
+.AddOpenApiOperationTransformer((operation, context, ct) =>
 {
-    operation.RequestBody ??= new Microsoft.OpenApi.Models.OpenApiRequestBody();
+    operation.RequestBody ??= new Microsoft.OpenApi.OpenApiRequestBody();
     operation.RequestBody.Description = "The payload to send as notification";
-    return operation;
+    return Task.CompletedTask;
 });
 
 app.Run();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PostgreSQL.ListenNotify.Configuration
 {
@@ -11,7 +12,7 @@ namespace PostgreSQL.ListenNotify.Configuration
         /// <summary>
         /// The PostgreSQL connection string
         /// </summary>
-        public string ConnectionString { get; set; }
+        public string? ConnectionString { get; set; }
 
         /// <summary>
         /// Channels to listen for notifications
@@ -21,7 +22,7 @@ namespace PostgreSQL.ListenNotify.Configuration
         /// <summary>
         /// Default channel for sending notifications
         /// </summary>
-        public string DefaultNotifyChannel { get; set; }
+        public string? DefaultNotifyChannel { get; set; }
 
         /// <summary>
         /// Application name to use in PostgreSQL connection
@@ -38,6 +39,7 @@ namespace PostgreSQL.ListenNotify.Configuration
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown when required options are missing</exception>
         /// <exception cref="ArgumentException">Thrown when options are invalid</exception>
+        [MemberNotNull(nameof(ConnectionString))]
         public void Validate()
         {
             if (string.IsNullOrWhiteSpace(ConnectionString))

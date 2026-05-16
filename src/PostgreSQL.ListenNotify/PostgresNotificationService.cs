@@ -17,15 +17,15 @@ namespace PostgreSQL.ListenNotify
         private readonly ILogger<PostgresNotificationService> _logger;
         private readonly PostgresNotificationOptions _options;
         private readonly string _connectionString;
-        private NpgsqlConnection _connection;
-        private NpgsqlConnection _notifyConnection;
+        private NpgsqlConnection? _connection;
+        private NpgsqlConnection? _notifyConnection;
         private bool _reconnecting;
         private readonly TimeSpan _reconnectDelay;
 
         /// <summary>
         /// Event triggered when a notification is received
         /// </summary>
-        public event EventHandler<PostgresNotificationEventArgs> NotificationReceived;
+        public event EventHandler<PostgresNotificationEventArgs>? NotificationReceived;
 
         /// <summary>
         /// Gets whether the service is currently connected to PostgreSQL
@@ -153,7 +153,7 @@ namespace PostgreSQL.ListenNotify
             }
         }
 
-        private void OnPostgresNotificationReceived(object sender, NpgsqlNotificationEventArgs e)
+        private void OnPostgresNotificationReceived(object? sender, NpgsqlNotificationEventArgs e)
         {
             _logger.LogInformation("Received notification on channel {Channel}: {Payload}", e.Channel, e.Payload);
             
@@ -162,7 +162,7 @@ namespace PostgreSQL.ListenNotify
                 new PostgresNotificationEventArgs(e.Channel, e.Payload, e.PID));
         }
 
-        private void OnConnectionStateChange(object sender, StateChangeEventArgs e)
+        private void OnConnectionStateChange(object? sender, StateChangeEventArgs e)
         {
             _logger.LogInformation("PostgreSQL connection state changed from {OldState} to {NewState}",
                 e.OriginalState, e.CurrentState);
